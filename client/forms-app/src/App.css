@@ -1,0 +1,73 @@
+/* App.css */
+.App {
+    text-align: center;
+    /* Убрали цвет фона приложения */
+    /* color: white; Цвет текста по умолчанию */
+    padding: 20px; /* Общий отступ */
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+}
+
+.unauthorized-plate {
+    color: #ff4d4d; /* Цвет для сообщения о неавторизованном пользователе */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.user-status {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+button {
+    padding: 15px;
+    font-size: 20px;
+    background-color: #888; /* Цвет кнопок - серый */
+    color: white; /* Цвет текста на кнопках */
+    border: none; /* Без границы */
+    border-radius: 5px; /* Скругление углов кнопок */
+    margin: 10px 0;
+    transition: background-color 0.3s; /* Плавный переход цвета */
+}
+
+button:hover {
+    background-color: #666; /* Цвет кнопки при наведении - темно-серый */
+}
+
+.user-list {
+    margin-top: 20px;
+}
+
+.user-item {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    padding: 10px;
+    border: 1px solid #ccc; /* Цвет границы - светло-серый */
+    margin: 5px auto;
+    border-radius: 3px;
+    background-color: transparent; /* Прозрачный фон для элементов списка */
+    font-size: 24px;
+}
+
+.user-status {
+    font-size: 20px;
+}
