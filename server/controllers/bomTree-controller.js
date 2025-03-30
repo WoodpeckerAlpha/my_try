@@ -3,8 +3,6 @@ const BomTreeService = require("../service/bomTree-service");
 class BomTreeController {
     async createBomTree(req, res, next) {
         try {
-            console.log("req.user", req.user.id);
-
             const treeData = req.body;
             const createdBy = req.user.id;
             const bomTreeData = await BomTreeService.createBomTree(
