@@ -2,7 +2,7 @@ const express = require("express");
 const toDoController = require("../../controllers/toDo-controller");
 const authMiddleware = require("../../middlewares/auth-middleware");
 
-const router = express.Router(); // ✅ Используем express.Router()
+const router = express.Router();
 
 router.post("/task", authMiddleware, toDoController.createTask);
 router.put("/task", authMiddleware, toDoController.updateTask);
