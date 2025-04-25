@@ -1,73 +1,50 @@
-/* App.css */
-.App {
-    text-align: center;
-    /* Убрали цвет фона приложения */
-    /* color: white; Цвет текста по умолчанию */
-    padding: 20px; /* Общий отступ */
+.navigation {
+	background-color: #f0f0f0;
+	padding: 1rem;
+	margin-bottom: 2rem;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+.nav-link {
+	margin-right: 1rem;
+	text-decoration: none;
+	color: #333;
+	font-weight: bold;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+.nav-link:hover {
+	color: #007bff;
 }
 
-.App-header {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
+.logout-btn {
+	float: right;
 }
 
-.unauthorized-plate {
-    color: #ff4d4d; /* Цвет для сообщения о неавторизованном пользователе */
-    font-size: 24px;
-    margin-bottom: 20px;
+.action-btn {
+	margin: 0.5rem;
+	padding: 0.5rem 1rem;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
 }
 
-.user-status {
-    font-size: 18px;
-    margin: 10px 0;
+.action-btn:hover {
+	background-color: #0056b3;
 }
 
-button {
-    padding: 15px;
-    font-size: 20px;
-    background-color: #888; /* Цвет кнопок - серый */
-    color: white; /* Цвет текста на кнопках */
-    border: none; /* Без границы */
-    border-radius: 5px; /* Скругление углов кнопок */
-    margin: 10px 0;
-    transition: background-color 0.3s; /* Плавный переход цвета */
+.todo-page {
+	padding: 2rem;
+	text-align: center;
 }
 
-button:hover {
-    background-color: #666; /* Цвет кнопки при наведении - темно-серый */
+.back-link {
+	display: inline-block;
+	margin-top: 1rem;
+	color: #007bff;
+	text-decoration: none;
 }
 
-.user-list {
-    margin-top: 20px;
-}
-
-.user-item {
-    display: flex;
-    flex-direction: column;
-    width: 500px;
-    padding: 10px;
-    border: 1px solid #ccc; /* Цвет границы - светло-серый */
-    margin: 5px auto;
-    border-radius: 3px;
-    background-color: transparent; /* Прозрачный фон для элементов списка */
-    font-size: 24px;
-}
-
-.user-status {
-    font-size: 20px;
+.back-link:hover {
+	text-decoration: underline;
 }

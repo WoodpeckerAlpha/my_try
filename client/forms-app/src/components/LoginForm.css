@@ -1,36 +1,59 @@
 /* LoginForm.css */
 .login-form {
-    display: flex;
-    flex-direction: column;
-    width: 500px;
-    margin: 0 auto;
-    padding: 20px; /* Добавлено для удобства */
-    border: 1px solid #ccc; /* Граница для выделения формы */
-    border-radius: 8px; /* Скругление углов */
-    /* Убрали фоновый цвет */
+	max-width: 400px;
+	margin: 2rem auto;
+	padding: 2rem;
+	background-color: #f8f9fa;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	text-align: center;
 }
 
 .login-form input {
-    margin: 10px 0;
-    padding: 10px;
-    font-size: 24px;
-    border: 1px solid #ccc; /* Граница поля ввода */
-    border-radius: 5px; /* Скругление углов */
-    background-color: transparent; /* Прозрачный фон */
-    color: #000; /* Цвет текста */
+	width: 100%;
+	padding: 0.75rem;
+	margin: 0.5rem 0;
+	border: 1px solid #ced4da;
+	border-radius: 4px;
+	font-size: 1rem;
+	box-sizing: border-box;
+}
+
+.login-form input:focus {
+	outline: none;
+	border-color: #007bff;
+	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .login-form button {
-    padding: 15px;
-    margin: 5px 0;
-    font-size: 20px;
-    background-color: #888; /* Цвет кнопок - серый */
-    color: white; /* Цвет текста на кнопках */
-    border: none; /* Без границы */
-    border-radius: 5px; /* Скругление углов кнопок */
-    transition: background-color 0.3s; /* Плавный переход цвета */
+	width: 100%;
+	padding: 0.75rem;
+	margin: 0.5rem 0;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background-color 0.3s;
 }
 
 .login-form button:hover {
-    background-color: #666; /* Цвет кнопки при наведении - темно-серый */
+	background-color: #0056b3;
+}
+
+.login-form button:last-child {
+	background-color: #28a745;
+}
+
+.login-form button:last-child:hover {
+	background-color: #218838;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 480px) {
+	.login-form {
+		padding: 1.5rem;
+		margin: 1rem;
+	}
 }
