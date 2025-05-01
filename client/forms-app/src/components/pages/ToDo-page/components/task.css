@@ -1,0 +1,127 @@
+/* Стили для TodoPage */
+.boards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.board-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #e6f7ff; /* Светло-голубой фон */
+    border-radius: 10px; /* Скругленные углы */
+    flex: 1 1 300px;
+}
+
+.task-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Стили для компонента Task */
+.task {
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень */
+}
+
+/* Цветная левая граница в зависимости от статуса */
+.task.pending {
+    border-left: 5px solid #ccc; /* Серая для "Не начато" */
+}
+
+.task.in_progress {
+    border-left: 5px solid #ffa500; /* Оранжевая для "В процессе" */
+}
+
+.task.complete {
+    border-left: 5px solid #008000; /* Зеленая для "Выполнено" */
+}
+
+.task h3 {
+    margin: 0 0 5px 0;
+}
+
+.task p {
+    margin: 0 0 10px 0;
+}
+
+.status-radio-group {
+    display: flex;
+    gap: 10px;
+}
+
+.status-radio-group label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.status-radio-group input[type="radio"] {
+    display: none;
+}
+
+.custom-radio {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+    border: 2px solid;
+    position: relative;
+}
+
+.custom-radio.pending {
+    border-color: #ccc;
+}
+
+.custom-radio.in_progress {
+    border-color: #ffa500;
+}
+
+.custom-radio.complete {
+    border-color: #008000;
+}
+
+input[type="radio"]:checked + .custom-radio::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+input[type="radio"][value="pending"]:checked + .custom-radio::after {
+    background-color: #ccc;
+}
+
+input[type="radio"][value="in_progress"]:checked + .custom-radio::after {
+    background-color: #ffa500;
+}
+
+input[type="radio"][value="complete"]:checked + .custom-radio::after {
+    background-color: #008000;
+}
+
+.status-radio-group span {
+    font-size: 14px;
+    white-space: nowrap; /* Предотвращение переноса текста */
+}
+
+/* Стили для ссылки "назад" */
+.back-link {
+    display: block;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}

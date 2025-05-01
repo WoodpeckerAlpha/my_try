@@ -1,64 +1,75 @@
-import {FC, useState, useEffect} from "react";
-import {Link} from "react-router-dom";
+import { FC, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+import Task from "./components/task";
+
 import TaskService from "../../../services/ToDo/todoService";
-import {TaskResponse} from "../../../models/response/TasksResponse/TaskResponse";
-import BoardCard from "./components/BoardsCard";
+
+import { IBoard } from "../../../models/response/TasksResponse/IBoard";
 
 const TodoPage: FC = () => {
-	const [boards, setBoards] = useState<TaskResponse | null>(null);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState<string | null>(null);
+    const [boards, setBoards] = useState<IBoard[] | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-	async function getTasks() {
-		try {
-			setLoading(true);
-			const response = await TaskService.getAllTask();
-			console.log("Response data:", response.data);
+    async function getTasks() {
+        try {
+            setLoading(true);
+            const response = await TaskService.getAllTask();
 
-			setBoards(response.data);
-			setError(null);
-		} catch (e) {
-			console.error("Error fetching tasks:", e);
-			setError("Failed to load tasks");
-			setBoards(null);
-		} finally {
-			setLoading(false);
-		}
-	}
+            setBoards(response.data.data.boards);
 
-	useEffect(() => {
-		getTasks();
-		console.log();
-	}, []);
+            setError(null);
+        } catch (e) {
+            console.error("Error fetching tasks:", e);
+            setError("Failed to load tasks");
+            setBoards(null);
+        } finally {
+            setLoading(false);
+        }
+    }
 
-	if (loading) {
-		return <div>Загрузка...</div>;
-	}
+    useEffect(() => {
+        getTasks();
+    }, []);
 
-	if (error) {
-		return <div>Error: {error}</div>;
-	}
+    if (loading) {
+        return <div>Загрузка...</div>;
+    }
 
-	if (!boards) {
-		return <div>Нет данных о досках</div>;
-	}
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
-	return (
-		<div className="todo-page">
-			<h1>Страница с задачами</h1>
-			<p>Здесь будет список ваших задач</p>
-			<div className="boardsPlate">
-				{boards.map((board) => (
-					<div key={board.id} className="boardCard">
-						<BoardCard board={board} />
-					</div>
-				))}
-			</div>
-			<Link to="/" className="back-link">
-				Вернуться на главную
-			</Link>
-		</div>
-	);
+    return (
+        <div className="todo-page">
+            <h1>Страница с задачами</h1>
+            <p>Здесь будет список ваших задач</p>
+            <div className="boards-container">
+                {boards && boards?.length > 0 ? (
+                    boards.map((board) => (
+                        <div key={board.id} className="board-card">
+                            <h2>{board.title}</h2>
+                            <div className="task-wrapper">
+                                {board.tasks && board.tasks.length > 0 ? (
+                                    board.tasks.map((task) => (
+                                        <Task key={task.id} {...task} />
+                                    ))
+                                ) : (
+                                    <p>Нет задач</p>
+                                )}
+                            </div>{" "}
+                        </div>
+                    ))
+                ) : (
+                    <p>Нет доступных досок</p>
+                )}
+            </div>
+            <Link to="/" className="back-link">
+                Вернуться на главную
+            </Link>
+        </div>
+    );
 };
 
 export default TodoPage;
