@@ -7,5 +7,6 @@ const router = express.Router();
 router.post("/board", authMiddleware, boardController.createBoard);
 router.get("/boards", authMiddleware, boardController.getAllBoards);
 router.delete("/board/:boardId", authMiddleware, boardController.deleteBoard);
+router.post("/board/:boardId", authMiddleware, boardController.changeTitle);
 
 module.exports = router;

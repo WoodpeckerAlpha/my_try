@@ -4,7 +4,7 @@ import {AuthResponse} from "../models/response/AuthResponse";
 export const API_URL = "http://localhost:5000/api";
 export const AUTH_URL = "auth";
 export const USER_URL = "users";
-export const TODO_URL = "todo";
+
 
 const api = axios.create({
 	withCredentials: true,

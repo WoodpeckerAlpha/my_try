@@ -121,8 +121,7 @@ class BoardService {
 			});
 
 			return {
-				data: results,
-				status: "200",
+				data: {...results},
 			};
 		} catch (error) {
 			if (error instanceof ApiError) {
@@ -196,7 +195,7 @@ class BoardService {
 		}
 	}
 
-	async changeBoradTitle(boardId, newTitle, userId) {
+	async changeBoardTitle(boardId, newTitle, userId) {
 		try {
 			ValidateField.requiredFields({boardId, newTitle, userId}, [
 				"boardId",
