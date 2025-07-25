@@ -18,7 +18,7 @@ class BoardController {
 			const userId = req.user.id;
 			const boards = await BoardService.getAllBoards(userId);
 
-			return res.sendResponse(200, boards);
+			return res.sendResponse(200, {...boards});
 		} catch (error) {
 			console.log("Ошибка при получении всех досок:", error.message);
 			next(error);
@@ -43,12 +43,12 @@ class BoardController {
 	async changeTitle(req, res, next) {
 		try {
 			const userId = req.user.id;
-			const boardId = req.params.boardId;
-			const newtitle = req.body.newTitle;
+			const boardId = req.body.boardId;
+			const newTitle = req.body.newTitle;
 
 			const updatedBoard = await BoardService.changeBoardTitle(
 				boardId,
-				newtitle,
+				newTitle,
 				userId
 			);
 

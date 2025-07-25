@@ -69,7 +69,7 @@ export default class Store {
 				`${API_URL}/${AUTH_URL}/refresh`,
 				{withCredentials: true}
 			);
-			console.log(response);
+
 			localStorage.setItem("token", response.data.accessToken);
 			this.setAuth(true);
 			this.setUser(response.data.user);

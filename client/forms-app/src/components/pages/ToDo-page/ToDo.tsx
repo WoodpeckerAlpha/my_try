@@ -1,27 +1,30 @@
-import {FC, useEffect, useState} from "react";
+import {FC, useEffect, createContext, useContext} from "react";
 import {Link} from "react-router-dom";
-import BoardService from "../../../services/ToDoService/BoardService";
-import BoardPlate from "./components/BoardPlate";
+import {observer} from "mobx-react-lite";
+import ToDoStore from "../../../store/toDoStore";
+
+interface ToDoState {
+	toDoStore: ToDoStore;
+}
+
+const toDoStore = new ToDoStore();
+
+export const ToDoContext = createContext<ToDoState>({toDoStore});
 
 const TodoPage: FC = () => {
-	const [boards, setBoards] = useState<any[]>([]);
+	const {toDoStore} = useContext(ToDoContext);
 
 	useEffect(() => {
 		const fetchBoards = async () => {
 			try {
-				const response = await BoardService.getAllBoards();
-				setBoards(response.data.data);
+				await toDoStore.getAllBoards();
 			} catch (error) {
-				console.log("error while fetching boards", error);
-				throw error;
+				console.error("Error fetching boards:", error);
 			}
 		};
-		fetchBoards();
-	}, []);
 
-	// useEffect(() => {
-	// 	console.log("Состояние boards обновлено:", boards);
-	// }, [boards]);
+		fetchBoards();
+	}, [toDoStore]);
 
 	return (
 		<div className="todo-page">
@@ -30,17 +33,26 @@ const TodoPage: FC = () => {
 			<Link to="/" className="back-link">
 				Вернуться на главную
 			</Link>
-			<div className="boards-list">
-				{Object.keys(boards).length > 0 ? (
-					Object.entries(boards).map(([key, board]) => (
-						<BoardPlate key={key} board={board} />
-					))
-				) : (
-					<p>Нет доступных досок</p>
-				)}
-			</div>
+
+			{toDoStore.isLoading ? (
+				<p>Загрузка...</p>
+			) : (
+				<div className="boards-list">
+					{Object.keys(toDoStore.boards).length > 0 ? (
+						Object.entries(toDoStore.boards).map(
+							([boardId, board]) => (
+								<div key={boardId}>
+									Board ID: {boardId}, Title: {board.title}
+								</div>
+							)
+						)
+					) : (
+						<p>Нет доступных досок</p>
+					)}
+				</div>
+			)}
 		</div>
 	);
 };
 
-export default TodoPage;
+export default observer(TodoPage);

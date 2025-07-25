@@ -109,6 +109,7 @@ class BoardService {
 			const results = {};
 			boards.forEach((board) => {
 				results[board._id] = {
+					title: board.title,
 					tasks: board.statuses.reduce((taskAcc, status) => {
 						taskAcc[status._id] = tasks.filter(
 							(task) =>
@@ -120,9 +121,7 @@ class BoardService {
 				};
 			});
 
-			return {
-				data: {...results},
-			};
+			return results;
 		} catch (error) {
 			if (error instanceof ApiError) {
 				throw error;

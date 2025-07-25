@@ -2,32 +2,33 @@ import {useState, useEffect} from "react";
 import EmptyTextPlate from "./EmptyTextPlate";
 import BoardService from "../../../../services/ToDoService/BoardService";
 
-const BoardPlate = ({initialBoard, onBoardUpdate}) => {
-	// Инициализируем состояние с защитой от undefined
+const BoardPlate = ({boardId, initialBoard, onBoardUpdate}: any) => {
 	const [currentBoard, setCurrentBoard] = useState(() => {
 		return {
-			boardId: initialBoard?.boardId || "",
-			title: initialBoard?.title ?? null, // Используем ?? для null/undefined
+			boardId: boardId || "",
+			title: initialBoard?.title ?? null,
 		};
 	});
 
 	useEffect(() => {
-		if (initialBoard) {
-			setCurrentBoard({
-				boardId: initialBoard.boardId || "",
-				title: initialBoard.title ?? null,
-			});
-		}
-	}, [initialBoard]);
+		setCurrentBoard((prev) => ({
+			...prev,
+			boardId: boardId || "",
+			title: initialBoard?.title ?? null,
+		}));
+	}, [boardId, initialBoard]);
 
-	const handleSaveBoardTitle = async (newTitle) => {
+	const handleSaveBoardTitle = async (title: any) => {
 		try {
-			const updatedBoard = await BoardService.setBoardTitle(
+			const updatedBoard: any = await BoardService.setBoardTitle(
 				currentBoard.boardId,
-				newTitle
+				title
 			);
 
-			setCurrentBoard(updatedBoard);
+			setCurrentBoard((prev) => ({
+				...prev,
+				title: updatedBoard.title,
+			}));
 
 			if (onBoardUpdate) {
 				onBoardUpdate(updatedBoard);
