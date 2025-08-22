@@ -3,6 +3,10 @@ module.exports = function responseMiddleware(req, res, next) {
 		res.status(statusCode).json({...payload});
 	};
 
+	res.sendSuccessCode = function (statusCode = 200, message = "") {
+		res.status(statusCode).json(message);
+	};
+
 	res.sendError = function (
 		statusCode = 500,
 		error = "Server error",

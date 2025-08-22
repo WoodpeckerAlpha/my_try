@@ -74,6 +74,7 @@ class BoardService {
 			);
 
 			const deletedBoard = await BoardModel.findByIdAndDelete(boardId);
+            
 			if (!deletedBoard) {
 				throw ApiError.NotFound("Board not found");
 			}
