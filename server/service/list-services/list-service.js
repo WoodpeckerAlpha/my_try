@@ -69,11 +69,13 @@ class ListService {
 
     async updateListData(user, listId, textFieldContent) {
         try {
-            ValidateField.requiredFields({ user, listId, textFieldContent }, [
-                "user",
-                "listId",
-                "textFieldContent",
-            ]);
+            ValidateField.requiredFields({ user, listId }, ["user", "listId"]);
+            if (!mongoose.Types.ObjectId.isValid(listId)) {
+                throw ApiError.BadRequest("Invalid list ID");
+            }
+            if (typeof textFieldContent !== "string") {
+                throw ApiError.BadRequest("textFieldContent must be a string");
+            }
             if (!mongoose.Types.ObjectId.isValid(listId)) {
                 throw ApiError.BadRequest("Invalid list ID");
             }
