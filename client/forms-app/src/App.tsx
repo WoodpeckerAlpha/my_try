@@ -1,5 +1,5 @@
 import "./App.css";
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext, useEffect } from "react";
 import {
     BrowserRouter as Router,
     Routes,
@@ -10,13 +10,13 @@ import {
 import ObservedLoginForm from "./components/LoginForm";
 import { Context } from "./index";
 import { observer } from "mobx-react-lite";
-import UserService from "./services/UserService";
-import { IUser } from "./models/IUser";
+// import UserService from "./services/UserService";
+// import { IUser } from "./models/IUser";
 import ListPage from "./components/pages/ListPage/ListsPage";
 
 const App: FC = () => {
     const { store } = useContext(Context);
-    const [users, setUsers] = useState<IUser[]>([]);
+    // const [users, setUsers] = useState<IUser[]>([]);
 
     useEffect(() => {
         if (localStorage.getItem("token")) {
@@ -24,15 +24,15 @@ const App: FC = () => {
         }
     }, [store]);
 
-    async function getUsers() {
-        try {
-            const response = await UserService.fetchUsers();
-            const usersData = response.data.users || [];
-            setUsers(usersData);
-        } catch (e) {
-            console.log(e);
-        }
-    }
+    // async function getUsers() {
+    //     try {
+    //         const response = await UserService.fetchUsers();
+    //         const usersData = response.data.users || [];
+    //         setUsers(usersData);
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // }
 
     if (store.isLoading) {
         return <div>Загрузка...</div>;
@@ -76,16 +76,16 @@ const App: FC = () => {
                         element={
                             <>
                                 <h1 className="user-status">
-                                    {store.isAuth
+                                    {store.isAuth && store.user
                                         ? `Пользователь авторизован: ${store.user.email}`
                                         : "АВТОРИЗУЙТЕСЬ"}
                                 </h1>
                                 <h1 className="user-status">
-                                    {store.user.isActivated
+                                    {store.user?.isActivated
                                         ? "Аккаунт подтвержден по почте"
                                         : "ПОДТВЕРДИТЕ АККАУНТ!!!!"}
                                 </h1>
-                                <div>
+                                {/* <div>
                                     <button
                                         onClick={getUsers}
                                         className="action-btn"
@@ -102,7 +102,7 @@ const App: FC = () => {
                                             {user.email}
                                         </div>
                                     ))}
-                                </div>
+                                </div> */}
                             </>
                         }
                     />

@@ -14,28 +14,28 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(responseMiddleware);
 app.use(
-	cors({
-		credentials: true,
-		origin: [process.env.CLIENT_URL, "http://localhost:3000"],
-	})
+    cors({
+        credentials: true,
+        origin: [process.env.CLIENT_URL, "http://localhost:3000"],
+    })
 );
 app.use("/api", router);
 app.use(errorMiddleware);
 
 const start = async () => {
-	try {
-		await mongoose
-			.connect(process.env.DB_URL)
-			.then(() => console.log("Connected to MongoDB"))
-			.catch((err) =>
-				console.error("Could not connect to MongoDB...", err)
-			);
-		app.listen(PORT, () => {
-			console.log(`server starts on ${PORT}`);
-		});
-	} catch (e) {
-		console.log(e);
-	}
+    try {
+        await mongoose
+            .connect(process.env.DB_URL)
+            .then(() => console.log("Connected to MongoDB"))
+            .catch((err) =>
+                console.error("Could not connect to MongoDB...", err)
+            );
+        app.listen(PORT, () => {
+            console.log(`server starts on ${PORT}`);
+        });
+    } catch (e) {
+        console.log(e);
+    }
 };
 
 start();

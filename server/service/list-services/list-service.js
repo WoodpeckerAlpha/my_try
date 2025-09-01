@@ -7,6 +7,7 @@ const ApiError = require("../../exception/api-error");
 
 const ValidateField = require("../../utils/validateFields");
 const AccessValidator = require("../../utils/AccessValidator");
+const { ListIndexesCursor } = require("mongodb");
 
 class ListService {
     async createList(user, listTitle) {
@@ -69,11 +70,7 @@ class ListService {
 
     async updateListData(user, listId, textFieldContent) {
         try {
-            ValidateField.requiredFields({ user, listId, textFieldContent }, [
-                "user",
-                "listId",
-                "textFieldContent",
-            ]);
+            ValidateField.requiredFields({ user, listId }, ["user", "listId"]);
             if (!mongoose.Types.ObjectId.isValid(listId)) {
                 throw ApiError.BadRequest("Invalid list ID");
             }
