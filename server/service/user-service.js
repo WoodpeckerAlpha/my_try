@@ -2,6 +2,7 @@ const UserModel = require("../models/user-model");
 const bcrypt = require("bcrypt");
 const mailService = require("./mail-service");
 const tokenService = require("./token-service");
+const ListService = require("./list-services/list-service");
 const UserDto = require("../dto/user-dto");
 const uuid = require("uuid");
 const ApiError = require("../exception/api-error");
@@ -94,6 +95,31 @@ class UserService {
     async getAllUsers() {
         const users = await UserModel.find().select("email -_id");
         return users;
+    }
+
+    async deleteAccount(userId, password) {
+        try {
+            const user = await UserModel.findById(userId);
+            if (!user) {
+                throw ApiError.NotFound("Пользователь не найден");
+            }
+
+            const isPassEquals = await bcrypt.compare(password, user.password);
+            if (!isPassEquals) {
+                throw ApiError.BadRequest("Некорректный пароль");
+            }
+
+            await tokenService.deleteTokens(userId);
+            await ListService.deleteAllListsForUser(userId);
+
+            const deletedData = await UserModel.deleteOne({ _id: userId });
+
+            if (!deletedData) {
+                throw ApiError.NotFound("Пользоваталь не найден");
+            }
+
+            return { message: "Аккаунт успешно удален" };
+        } catch (error) {}
     }
 }
 

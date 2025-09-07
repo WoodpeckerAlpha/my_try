@@ -7,7 +7,6 @@ const ApiError = require("../../exception/api-error");
 
 const ValidateField = require("../../utils/validateFields");
 const AccessValidator = require("../../utils/AccessValidator");
-const { ListIndexesCursor } = require("mongodb");
 
 class ListService {
     async createList(user, listTitle) {
@@ -115,6 +114,16 @@ class ListService {
 
             return listsDTO;
         } catch (error) {}
+    }
+
+    async deleteAllListsForUser(userId) {
+        try {
+            const result = await ListModel.deleteMany({ user: userId });
+            return result.deletedCount; // сколько списков удалено
+        } catch (error) {
+            console.error("Error while deleting lists for user:", error);
+            throw ApiError.InternalError("Failed to delete user's lists");
+        }
     }
 }
 

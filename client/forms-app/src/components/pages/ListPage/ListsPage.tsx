@@ -4,7 +4,7 @@ import { ListsResponse } from "../../../models/response/ListsResponse/ListsRespo
 import { IList } from "../../../models/ListsModel/IList";
 import ListPlate from "./ListPlate";
 import EmptyListPlate from "./EmptyListPlate";
-import styles from "./ListPage.module.css";
+import styles from "./ListsPage.module.css";
 
 const ListPage: FC = () => {
     const [lists, setLists] = useState<IList[]>([]);

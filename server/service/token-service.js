@@ -51,6 +51,15 @@ class TokenService {
 
         return tokenData;
     }
+
+    async deleteTokens(userId) {
+        if (!userId) {
+            throw new Error("UserId is required to delete tokens");
+        }
+
+        const result = await tokenModel.deleteMany({ user: userId });
+        return result;
+    }
 }
 
 module.exports = new TokenService();

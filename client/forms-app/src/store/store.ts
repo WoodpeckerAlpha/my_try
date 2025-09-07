@@ -1,9 +1,9 @@
 import { makeAutoObservable } from "mobx";
 import { IUser } from "../models/IUser";
 import AuthService from "../services/AuthService";
-import axios from "axios";
 import { AuthResponse } from "../models/response/AuthResponse";
-import { API_URL, AUTH_URL } from "../http";
+import api, { API_URL, AUTH_URL } from "../http";
+import UserService from "../services/UserService";
 
 export default class Store {
     user: IUser | null = null;
@@ -28,7 +28,6 @@ export default class Store {
 
     async login(email: string, password: string) {
         try {
-            console.log("API URL:", API_URL);
             const response = await AuthService.login(email, password);
 
             localStorage.setItem("token", response.data.accessToken);
@@ -42,12 +41,15 @@ export default class Store {
     async registration(email: string, password: string) {
         try {
             const response = await AuthService.registration(email, password);
-            console.log(response);
             localStorage.setItem("token", response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
+            console.log("регистрация");
+
+            return true;
         } catch (e) {
             console.log((e as any).response?.data?.message);
+            return false;
         }
     }
 
@@ -66,8 +68,8 @@ export default class Store {
     async checkAuth() {
         this.setLoading(true);
         try {
-            const response = await axios.get<AuthResponse>(
-                `${API_URL}/${AUTH_URL}/refresh`,
+            const response = await api.get<AuthResponse>(
+                `${API_URL}${AUTH_URL}/refresh`,
                 { withCredentials: true }
             );
 
@@ -75,7 +77,25 @@ export default class Store {
             this.setAuth(true);
             this.setUser(response.data.user);
         } catch (e) {
+            localStorage.removeItem("token");
             console.log((e as any).response?.data?.message);
+        } finally {
+            this.setLoading(false);
+        }
+    }
+
+    async deleteAccount(password: string) {
+        this.setLoading(true);
+        try {
+            const response = await UserService.deleteAccount(password);
+            if (response.status === 200) {
+                localStorage.removeItem("token");
+                this.setAuth(false);
+                this.setUser(null);
+            }
+        } catch (error) {
+            console.log((error as any).response?.data?.message);
+            throw error;
         } finally {
             this.setLoading(false);
         }

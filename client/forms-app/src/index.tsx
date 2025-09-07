@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import { createContext } from "react";
 import ReactDOM from "react-dom/client";
 import ObservedApp from "./App";
 import Store from "./store/store";
