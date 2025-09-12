@@ -18,7 +18,6 @@ const DeletingPage: FC = () => {
 
         try {
             await store.deleteAccount(password);
-            // store.deleteAccount теперь сам управляет isLoading, isAuth и user
         } catch (e: any) {
             setError(
                 e.response?.data?.message || "Ошибка при удалении аккаунта"

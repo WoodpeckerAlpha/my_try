@@ -1,5 +1,5 @@
 import {FC, useState, useRef, useEffect} from "react";
-import ListsService from "../../../services/ListService/ListService";
+import ListsService from "../../../../services/ListService/ListService";
 import styles from "./EmptyListPlate.module.css";
 
 interface EmptyListPlateProps {
