@@ -10,10 +10,10 @@ import {Context} from "./index";
 import {observer} from "mobx-react-lite";
 
 import ListPage from "./components/pages/ListPage/ListsPage";
-import DeletingPage from "./components/pages/DeletingPage/DeletePage";
 import Navigation from "./components/Navigation/Navigation";
-import PrivateRoute from "./components/PrivateRoute/ProvateRoute";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import UserStatus from "./components/UserStatus/UserStatus";
+import ObservedLoginForm from "./components/LoginForm";
 
 const App: FC = () => {
 	const {store} = useContext(Context);
@@ -34,6 +34,10 @@ const App: FC = () => {
 					<UserStatus></UserStatus>
 				</PrivateRoute>
 				<Routes>
+					<Route
+						path="/"
+						element={<ObservedLoginForm></ObservedLoginForm>}
+					></Route>
 					<Route
 						path="/list"
 						element={

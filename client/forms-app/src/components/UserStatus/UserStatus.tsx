@@ -1,14 +1,9 @@
 import {FC, useContext, useState} from "react";
 import {Context} from "../../index";
 import {Link} from "react-router-dom";
-import {
-	BrowserRouter as Router,
-	Routes,
-	Route,
-	Navigate,
-} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 
-import PrivateRoute from "../PrivateRoute/ProvateRoute";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import DeletingPage from "../pages/DeletingPage/DeletePage";
 
 const UserStatus: FC = () => {
@@ -18,8 +13,6 @@ const UserStatus: FC = () => {
 	const toggleMenu = () => {
 		setIsMenuOpen((prev) => !prev);
 	};
-
-    
 
 	return (
 		<div className="userStatusWrapper">
@@ -40,7 +33,6 @@ const UserStatus: FC = () => {
 						</div>
 					</div>
 					<div className="dropdown-menu-block">
-						Link
 						<button>
 							<div className="dropdown-menu-textBox">
 								Send verification code
