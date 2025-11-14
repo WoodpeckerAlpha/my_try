@@ -1,10 +1,6 @@
 import {FC, useContext, useState} from "react";
 import {Context} from "../../index";
 import {Link} from "react-router-dom";
-import {BrowserRouter as Router, Route} from "react-router-dom";
-
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import DeletingPage from "../pages/DeletingPage/DeletePage";
 
 const UserStatus: FC = () => {
 	const {store} = useContext(Context);
@@ -14,24 +10,32 @@ const UserStatus: FC = () => {
 		setIsMenuOpen((prev) => !prev);
 	};
 
+	// const handleSendVerificationCode = () => {
+	//     await UserStatusService
+	// }
+
 	return (
 		<div className="userStatusWrapper">
 			<div className="header">
 				<button onClick={toggleMenu}>
 					<img
-						src="client\forms-app\src\Media\UserStatus\listIcon.svg"
+						src="client/forms-app/src/Media/UserStatus/listIcon.svg"
 						alt="="
 					/>
 				</button>
 			</div>
+
 			{isMenuOpen && (
 				<div className="dropdown-menu">
 					<div className="dropdown-menu-block">
-						<div className="dropdown-menu-textBox">{`${store.user?.email}`}</div>
+						<div className="dropdown-menu-textBox">
+							{store.user?.email}
+						</div>
 						<div className="dropdown-menu-textBox">
 							заглушка под _ID
 						</div>
 					</div>
+
 					<div className="dropdown-menu-block">
 						<button>
 							<div className="dropdown-menu-textBox">
@@ -43,6 +47,7 @@ const UserStatus: FC = () => {
 								Change Password
 							</div>
 						</button>
+
 						<Link to="/deleteAccount" className="nav-link">
 							<div className="dropdown-menu-textBox">
 								delete account
@@ -53,27 +58,18 @@ const UserStatus: FC = () => {
 					<div className="dropdown-menu-block">
 						<button>
 							<div className="dropdown-menu-textBox">
-								bata access
+								beta access
 							</div>
 						</button>
 					</div>
+
 					<div className="dropdown-menu-block">
-						<button>
+						<button onClick={() => store.logout()}>
 							<div className="dropdown-menu-textBox">logout</div>
 						</button>
 					</div>
 				</div>
 			)}
-			<Router>
-				<Route
-					path="/deleteAccount"
-					element={
-						<PrivateRoute>
-							<DeletingPage></DeletingPage>
-						</PrivateRoute>
-					}
-				/>
-			</Router>
 		</div>
 	);
 };

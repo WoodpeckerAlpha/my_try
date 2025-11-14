@@ -13,7 +13,7 @@ const Navigation: FC = () => {
 			<Link to="/" className="nav-link">
 				Главная
 			</Link>
-			<Link to="/list" className="nav-link">
+			<Link to="/lists" className="nav-link">
 				Списки
 			</Link>
 			<Link to="/deleteAccount" className="nav-link">

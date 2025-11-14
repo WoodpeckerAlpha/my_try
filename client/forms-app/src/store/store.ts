@@ -3,7 +3,7 @@ import {IUser} from "../models/IUser";
 import AuthService from "../services/AuthService";
 import {AuthResponse} from "../models/response/AuthResponse";
 import api, {AUTH_URL} from "../http";
-import UserService from "../services/UserService";
+import UserService from "../services/UserService/UserService";
 
 export default class Store {
 	user: IUser | null = null;
