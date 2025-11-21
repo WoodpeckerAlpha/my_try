@@ -1,18 +1,45 @@
 import {FC, useContext, useState} from "react";
-import {Context} from "../../index";
 import {Link} from "react-router-dom";
+import {Context} from "../../index";
+
+import UserService from "../../services/UserService/UserService";
+
+import ModalFrame from "../Utils/ModalFrame/ModalFrame";
 
 const UserStatus: FC = () => {
 	const {store} = useContext(Context);
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	const [modalMessage, setModalMessage] = useState<string>("");
+	const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
 	const toggleMenu = () => {
 		setIsMenuOpen((prev) => !prev);
 	};
 
-	// const handleSendVerificationCode = () => {
-	//     await UserStatusService
-	// }
+	const handleSendVerificationCode = async () => {
+		try {
+			const message = await UserService.sendVerificationCode();
+
+			setModalMessage(`${message.message}`);
+			setIsSuccess(true);
+			setIsModalOpen(true);
+
+			setTimeout(() => {
+				setIsModalOpen(false);
+			}, 3000);
+		} catch (error: any) {
+			setModalMessage(
+				error.message.message || "Failed to send verification code"
+			);
+			setIsSuccess(false);
+			setIsModalOpen(true);
+
+			setTimeout(() => {
+				setIsModalOpen(false);
+			}, 3000);
+		}
+	};
 
 	return (
 		<div className="userStatusWrapper">
@@ -37,15 +64,17 @@ const UserStatus: FC = () => {
 					</div>
 
 					<div className="dropdown-menu-block">
-						<button>
+						<button onClick={handleSendVerificationCode}>
 							<div className="dropdown-menu-textBox">
 								Send verification code
 							</div>
 						</button>
 						<button>
-							<div className="dropdown-menu-textBox">
-								Change Password
-							</div>
+							<Link to="/changePassword">
+								<div className="dropdown-menu-textBox">
+									Change Password
+								</div>
+							</Link>
 						</button>
 
 						<Link to="/deleteAccount" className="nav-link">
@@ -69,6 +98,22 @@ const UserStatus: FC = () => {
 						</button>
 					</div>
 				</div>
+			)}
+			{/* Модальное окно для отображения статуса */}
+			{isModalOpen && (
+				<ModalFrame
+					onClose={() => setIsModalOpen(false)}
+					type={isSuccess ? "success" : "error"}
+				>
+					<div
+						className={`modal-content ${
+							isSuccess ? "success" : "error"
+						}`}
+					>
+						<h3>{isSuccess ? "Success" : "Error"}</h3>
+						<p>{modalMessage}</p>
+					</div>
+				</ModalFrame>
 			)}
 		</div>
 	);

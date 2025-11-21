@@ -16,6 +16,7 @@ import UserStatus from "./components/UserStatus/UserStatus";
 import ObservedLoginForm from "./components/LoginForm";
 import HomePage from "./components/pages/homePage/HomePage";
 import DeletePage from "./components/pages/DeletingPage/DeletePage";
+import ChangingPasswordPage from "./components/pages/ChangingPasswordPage/ChangingPasswordPage";
 
 const App: FC = () => {
 	const {store} = useContext(Context);
@@ -76,6 +77,14 @@ const App: FC = () => {
 								element={
 									<PrivateRoute>
 										<DeletePage />
+									</PrivateRoute>
+								}
+							/>
+							<Route
+								path="/changePassword"
+								element={
+									<PrivateRoute>
+										<ChangingPasswordPage />
 									</PrivateRoute>
 								}
 							/>

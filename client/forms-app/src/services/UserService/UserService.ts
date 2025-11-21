@@ -20,9 +20,10 @@ export default class UserService {
 		);
 	}
 
-	static sendVerificationCode(): Promise<SuccessResponse> {
+	static async sendVerificationCode(): Promise<SuccessResponse> {
 		try {
-			const response = await api.get(`${USER_URL}/sendCode`);
+			const response = await api.post(`${USER_URL}/user/sendCode`);
+			return {statusCode: response.status, message: response.data};
 		} catch (error: any) {
 			const statusCode = error.response?.status || 500;
 			const message =
@@ -34,6 +35,29 @@ export default class UserService {
 			(updateError as any).statusCode = statusCode;
 
 			throw updateError;
+		}
+	}
+
+	static async changePassword(
+		passSecond: string,
+		newPassword: string
+	): Promise<SuccessResponse> {
+		try {
+			const response = await api.post(`${USER_URL}/user/changePassword`, {
+				passSecond,
+				newPassword,
+			});
+			return {
+				statusCode: response.status,
+				message: response.data.message,
+			};
+		} catch (error: any) {
+			const message =
+				error.response?.data ||
+				error.message ||
+				"Changing password failed";
+
+			throw new Error(message);
 		}
 	}
 }
