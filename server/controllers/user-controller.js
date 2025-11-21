@@ -60,7 +60,6 @@ class UserController {
 
 	async refresh(req, res, next) {
 		try {
-
 			const {refreshToken} = req.cookies;
 			const userData = await userService.refresh(refreshToken);
 
@@ -90,6 +89,35 @@ class UserController {
 			const password = req.body.password;
 
 			const message = await userService.deleteAccount(userId, password);
+			return res.sendSuccessCode(200, message);
+		} catch (error) {
+			next(error);
+		}
+	}
+
+	async sendVerificationCode(req, res, next) {
+		try {
+			const userId = req.user.id;
+			const message = await userService.sendVerificationCode(userId);
+
+			return res.sendSuccessCode(200, message);
+		} catch (error) {
+			next(error);
+		}
+	}
+
+	async changePassword(req, res, next) {
+		try {
+			const userId = req.user.id;
+			const oldPassword = req.body.passSecond;
+			const newPassword = req.body.newPassword;
+
+			const message = await userService.changePassword(
+				userId,
+				oldPassword,
+				newPassword
+			);
+
 			return res.sendSuccessCode(200, message);
 		} catch (error) {
 			next(error);
