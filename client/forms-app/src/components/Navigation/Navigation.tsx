@@ -16,12 +16,6 @@ const Navigation: FC = () => {
 			<Link to="/lists" className="nav-link">
 				Списки
 			</Link>
-			<Link to="/deleteAccount" className="nav-link">
-				Удалить аккаунт
-			</Link>
-			<button onClick={() => store.logout()} className="logout-btn">
-				Выйти
-			</button>
 		</nav>
 	);
 };

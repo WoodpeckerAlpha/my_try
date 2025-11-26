@@ -2,6 +2,8 @@ import {FC, useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import {Context} from "../../index";
 
+import styles from "./UserStatus.module.css";
+
 import UserService from "../../services/UserService/UserService";
 
 import ModalFrame from "../Utils/ModalFrame/ModalFrame";
@@ -42,8 +44,8 @@ const UserStatus: FC = () => {
 	};
 
 	return (
-		<div className="userStatusWrapper">
-			<div className="header">
+		<div className={styles.wrapper}>
+			<div className={styles.header}>
 				<button onClick={toggleMenu}>
 					<img
 						src="client/forms-app/src/Media/UserStatus/listIcon.svg"
@@ -53,48 +55,60 @@ const UserStatus: FC = () => {
 			</div>
 
 			{isMenuOpen && (
-				<div className="dropdown-menu">
-					<div className="dropdown-menu-block">
-						<div className="dropdown-menu-textBox">
+				<div className={styles.dropdown_menu}>
+					<div className="styles.dropdown-menu-block">
+						<div className="styles.dropdown-menu-text">email</div>
+						<div className="styles.dropdown-menu-textBox">
 							{store.user?.email}
 						</div>
-						<div className="dropdown-menu-textBox">
+						{!store.user?.isActivated && (
+							<div className="styles.dropdown-menu_textbox">
+								Подтвердите почту.
+							</div>
+						)}
+
+						<div className="styles.dropdown-menu-textBox">
 							заглушка под _ID
 						</div>
 					</div>
 
-					<div className="dropdown-menu-block">
+					<div className="styles.dropdown-menu-block">
 						<button onClick={handleSendVerificationCode}>
-							<div className="dropdown-menu-textBox">
+							<div className="styles.dropdown-menu-textBox">
 								Send verification code
 							</div>
 						</button>
+
 						<button>
 							<Link to="/changePassword">
-								<div className="dropdown-menu-textBox">
+								<div className="styles.dropdown-menu-textBox">
 									Change Password
 								</div>
 							</Link>
 						</button>
 
-						<Link to="/deleteAccount" className="nav-link">
-							<div className="dropdown-menu-textBox">
-								delete account
-							</div>
-						</Link>
+						<button>
+							<Link to="/deleteAccount">
+								<div className="styles.dropdown-menu-textBox">
+									delete account
+								</div>
+							</Link>
+						</button>
 					</div>
 
-					<div className="dropdown-menu-block">
+					<div className="styles.dropdown-menu-block">
 						<button>
-							<div className="dropdown-menu-textBox">
+							<div className="styles.dropdown-menu-textBox">
 								beta access
 							</div>
 						</button>
 					</div>
 
-					<div className="dropdown-menu-block">
+					<div className="styles.dropdown-menu-block">
 						<button onClick={() => store.logout()}>
-							<div className="dropdown-menu-textBox">logout</div>
+							<div className="styles.dropdown-menu-textBox">
+								logout
+							</div>
 						</button>
 					</div>
 				</div>

@@ -27,7 +27,6 @@ const ChangingPasswordPage: FC = () => {
 				passwordSecond,
 				newPassword
 			);
-			console.log(message);
 
 			setModalMessage(`${message.message}`);
 			setIsSuccess(true);
@@ -36,6 +35,9 @@ const ChangingPasswordPage: FC = () => {
 			setTimeout(() => {
 				setIsModalOpen(false);
 			}, 3000);
+			setPasswordFirst("");
+			setPasswordSecond("");
+			setNewPassword("");
 		} catch (error: any) {
 			setModalMessage(error.message || "Failed to change password");
 			setIsSuccess(false);

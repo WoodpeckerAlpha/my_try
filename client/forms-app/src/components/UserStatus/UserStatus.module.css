@@ -1,0 +1,32 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	max-width: 355px;
+}
+
+.header {
+	background-color: #2ec4b6;
+	margin: 0 5px;
+	height: 100px;
+	align-items: center;
+	display: flex;
+	align-items: center;
+}
+
+.header > button {
+	margin: 0 30px;
+	height: 50px;
+	width: 50px;
+	background: none;
+	border-style: none;
+}
+.header > button > img {
+	height: 50px;
+	width: 50px;
+}
+
+.dropdown_menu {
+	background-color: #cbf3f0;
+	margin: 5px;
+	max-height: 1565px;
+}
