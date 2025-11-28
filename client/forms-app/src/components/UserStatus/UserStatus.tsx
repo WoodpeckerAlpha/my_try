@@ -8,6 +8,8 @@ import UserService from "../../services/UserService/UserService";
 
 import ModalFrame from "../Utils/ModalFrame/ModalFrame";
 
+import listIcon from "../../Media/UserStatus/listIcon.svg";
+
 const UserStatus: FC = () => {
 	const {store} = useContext(Context);
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -47,41 +49,43 @@ const UserStatus: FC = () => {
 		<div className={styles.wrapper}>
 			<div className={styles.header}>
 				<button onClick={toggleMenu}>
-					<img
-						src="client/forms-app/src/Media/UserStatus/listIcon.svg"
-						alt="="
-					/>
+					<img src={listIcon} alt="=" />
 				</button>
 			</div>
 
 			{isMenuOpen && (
 				<div className={styles.dropdown_menu}>
-					<div className="styles.dropdown-menu-block">
-						<div className="styles.dropdown-menu-text">email</div>
-						<div className="styles.dropdown-menu-textBox">
-							{store.user?.email}
+					<div className={styles.dropdown_menu_block}>
+						<div>
+							<div className={styles.dropdown_menu_text}>
+								email
+							</div>
+							<div className={styles.dropdown_menu_textBox}>
+								{store.user?.email}
+							</div>
 						</div>
+
 						{!store.user?.isActivated && (
-							<div className="styles.dropdown-menu_textbox">
+							<div className={styles.dropdown_menu_textBox}>
 								Подтвердите почту.
 							</div>
 						)}
 
-						<div className="styles.dropdown-menu-textBox">
+						<div className={styles.dropdown_menu_textBox}>
 							заглушка под _ID
 						</div>
 					</div>
 
-					<div className="styles.dropdown-menu-block">
+					<div className={styles.dropdown_menu_block}>
 						<button onClick={handleSendVerificationCode}>
-							<div className="styles.dropdown-menu-textBox">
+							<div className={styles.dropdown_menu_textBox}>
 								Send verification code
 							</div>
 						</button>
 
 						<button>
 							<Link to="/changePassword">
-								<div className="styles.dropdown-menu-textBox">
+								<div className={styles.dropdown_menu_textBox}>
 									Change Password
 								</div>
 							</Link>
@@ -89,24 +93,24 @@ const UserStatus: FC = () => {
 
 						<button>
 							<Link to="/deleteAccount">
-								<div className="styles.dropdown-menu-textBox">
+								<div className={styles.dropdown_menu_textBox}>
 									delete account
 								</div>
 							</Link>
 						</button>
 					</div>
 
-					<div className="styles.dropdown-menu-block">
+					<div className={styles.dropdown_menu_block}>
 						<button>
-							<div className="styles.dropdown-menu-textBox">
+							<div className={styles.dropdown_menu_textBox}>
 								beta access
 							</div>
 						</button>
 					</div>
 
-					<div className="styles.dropdown-menu-block">
+					<div className={styles.dropdown_menu_block}>
 						<button onClick={() => store.logout()}>
-							<div className="styles.dropdown-menu-textBox">
+							<div className={styles.dropdown_menu_textBox}>
 								logout
 							</div>
 						</button>

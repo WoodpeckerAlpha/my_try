@@ -10,7 +10,6 @@
 	height: 100px;
 	align-items: center;
 	display: flex;
-	align-items: center;
 }
 
 .header > button {
@@ -23,10 +22,41 @@
 .header > button > img {
 	height: 50px;
 	width: 50px;
+	rotate: 180deg;
 }
 
 .dropdown_menu {
 	background-color: #cbf3f0;
 	margin: 5px;
-	max-height: 1565px;
+	max-height: 1000px;
+}
+
+.dropdown_menu_block {
+	padding: 25px 11px;
+	gap: 24px;
+	display: flex;
+	flex-direction: column;
+}
+
+.dropdown_menu_text {
+	font-size: 14px;
+	margin-left: 15px;
+}
+
+.dropdown_menu_textBox {
+	background-color: #ffbf69;
+	border: 1px black solid;
+	height: 50px;
+	width: 295px;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	padding-left: 15px;
+	font-weight: 500;
+	font-size: 24px;
+}
+
+.dropdown_menu_block > button {
+	background: none;
+	border-style: none;
 }
