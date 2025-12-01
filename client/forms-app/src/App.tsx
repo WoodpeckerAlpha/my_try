@@ -32,71 +32,77 @@ const App: FC = () => {
 	return (
 		<Router>
 			<div className="App">
-				<Navigation />
-
 				{store.isAuth && (
 					<PrivateRoute>
 						<UserStatus />
 					</PrivateRoute>
 				)}
 
-				<Routes>
-					{!store.isAuth ? (
-						<>
-							{/* LOGIN */}
-							<Route path="/" element={<ObservedLoginForm />} />
-							<Route
-								path="*"
-								element={<Navigate to="/" replace />}
-							/>
-						</>
-					) : (
-						<>
-							{/* HOME */}
-							<Route
-								path="/home"
-								element={
-									<PrivateRoute>
-										<HomePage />
-									</PrivateRoute>
-								}
-							/>
+				<div className="main_content">
+					<Navigation />
 
-							{/* LISTS */}
-							<Route
-								path="/lists"
-								element={
-									<PrivateRoute>
-										<ListPage />
-									</PrivateRoute>
-								}
-							/>
+					<Routes>
+						{!store.isAuth ? (
+							<>
+								{/* LOGIN */}
+								<Route
+									path="/"
+									element={<ObservedLoginForm />}
+								/>
+								<Route
+									path="*"
+									element={<Navigate to="/" replace />}
+								/>
+							</>
+						) : (
+							<>
+								{/* HOME */}
+								<Route
+									path="/home"
+									element={
+										<PrivateRoute>
+											<HomePage />
+										</PrivateRoute>
+									}
+								/>
 
-							<Route
-								path="/deleteAccount"
-								element={
-									<PrivateRoute>
-										<DeletePage />
-									</PrivateRoute>
-								}
-							/>
-							<Route
-								path="/changePassword"
-								element={
-									<PrivateRoute>
-										<ChangingPasswordPage />
-									</PrivateRoute>
-								}
-							/>
+								{/* LISTS */}
+								<Route
+									path="/lists"
+									element={
+										<PrivateRoute>
+											<ListPage />
+										</PrivateRoute>
+									}
+								/>
 
-							{/* Любой неправильный путь → /home */}
-							<Route
-								path="*"
-								element={<Navigate to="/home" replace />}
-							/>
-						</>
-					)}
-				</Routes>
+								<Route
+									path="/deleteAccount"
+									element={
+										<PrivateRoute>
+											<DeletePage />
+										</PrivateRoute>
+									}
+								/>
+								<Route
+									path="/changePassword"
+									element={
+										<PrivateRoute>
+											<ChangingPasswordPage />
+										</PrivateRoute>
+									}
+								/>
+
+								{/* Любой неправильный путь → /home */}
+								<Route
+									path="*"
+									element={<Navigate to="/home" replace />}
+								/>
+							</>
+						)}
+					</Routes>
+				</div>
+				<div className="place_holder">place_holder</div>
 			</div>
 		</Router>
 	);

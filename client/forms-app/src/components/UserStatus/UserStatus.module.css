@@ -1,7 +1,8 @@
 .wrapper {
 	display: flex;
 	flex-direction: column;
-	max-width: 355px;
+	width: 20%;
+	min-width: 305px;
 }
 
 .header {
@@ -47,7 +48,7 @@
 	background-color: #ffbf69;
 	border: 1px black solid;
 	height: 50px;
-	width: 295px;
+	width: 53vmin;
 	border-radius: 10px;
 	display: flex;
 	align-items: center;
