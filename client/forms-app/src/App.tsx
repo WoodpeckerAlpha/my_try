@@ -102,7 +102,12 @@ const App: FC = () => {
 						)}
 					</Routes>
 				</div>
-				<div className="place_holder">place_holder</div>
+
+				{store.isAuth && (
+					<PrivateRoute>
+						<div className="place_holder">place_holder</div>
+					</PrivateRoute>
+				)}
 			</div>
 		</Router>
 	);

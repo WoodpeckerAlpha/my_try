@@ -64,6 +64,7 @@
 
 .main_content {
 	width: 60%;
+	margin: 0 auto;
 }
 
 .place_holder {
@@ -71,4 +72,32 @@
 	min-width: 305px;
 	color: beige;
 	background-color: chartreuse;
+	flex: 0 0 350px;
+}
+@media (max-width: 768px) {
+	.App {
+		flex-direction: column;
+		gap: 15px;
+		padding: 10px;
+		box-sizing: border-box;
+	}
+
+	/* 2. Элементы теперь занимают всю доступную ширину */
+	.place_holder,
+	.main-content {
+		flex: 1 1 100%;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	/* 3. Изменение порядка (По желанию: можно переместить основной контент наверх) */
+	.main-content {
+		order: -1; /* Поместить основной контент на первое место */
+	}
+
+	/* 4. Адаптивность дочерних элементов */
+	.item {
+		/* На маленьких экранах дочерние элементы также будут занимать всю ширину */
+		flex: 1 1 100%;
+	}
 }

@@ -28,8 +28,9 @@
 
 .dropdown_menu {
 	background-color: #cbf3f0;
-	margin: 5px;
+	margin: 5px 5px 0px;
 	max-height: 1000px;
+	flex: 1;
 }
 
 .dropdown_menu_block {
@@ -48,16 +49,35 @@
 	background-color: #ffbf69;
 	border: 1px black solid;
 	height: 50px;
-	width: 53vmin;
 	border-radius: 10px;
 	display: flex;
 	align-items: center;
 	padding-left: 15px;
 	font-weight: 500;
 	font-size: 24px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .dropdown_menu_block > button {
 	background: none;
 	border-style: none;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+@media (max-width: 768px) {
+	.wrapper {
+		flex: 1 1 100%;
+		width: 100%;
+		box-sizing: border-box;
+		min-width: 0px;
+	}
 }
