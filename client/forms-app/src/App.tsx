@@ -17,6 +17,7 @@ import ObservedLoginForm from "./components/LoginForm";
 import HomePage from "./components/pages/homePage/HomePage";
 import DeletePage from "./components/pages/DeletingPage/DeletePage";
 import ChangingPasswordPage from "./components/pages/ChangingPasswordPage/ChangingPasswordPage";
+import ActivationPage from "./components/pages/ActivationPage/ActivationPage";
 
 const App: FC = () => {
 	const {store} = useContext(Context);
@@ -44,11 +45,18 @@ const App: FC = () => {
 					<Routes>
 						{!store.isAuth ? (
 							<>
+								{/* ACTIVATE */}
+								<Route
+									path="/activate/:activationToken"
+									element={<ActivationPage />}
+								/>
 								{/* LOGIN */}
 								<Route
 									path="/"
 									element={<ObservedLoginForm />}
 								/>
+
+								{/* OTHER */}
 								<Route
 									path="*"
 									element={<Navigate to="/" replace />}
@@ -75,7 +83,7 @@ const App: FC = () => {
 										</PrivateRoute>
 									}
 								/>
-
+								{/* DELETEACCOUNT */}
 								<Route
 									path="/deleteAccount"
 									element={
@@ -84,6 +92,7 @@ const App: FC = () => {
 										</PrivateRoute>
 									}
 								/>
+								{/* CHANGEPASSWORD */}
 								<Route
 									path="/changePassword"
 									element={

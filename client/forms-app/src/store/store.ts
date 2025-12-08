@@ -26,6 +26,12 @@ export default class Store {
 		this.isLoading = bool;
 	}
 
+	setUserActivate(bool: boolean) {
+		if (this.user) {
+			this.user.isActivated = bool;
+		}
+	}
+
 	async login(email: string, password: string) {
 		try {
 			const response = await AuthService.login(email, password);

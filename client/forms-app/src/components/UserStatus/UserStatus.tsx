@@ -19,6 +19,7 @@ const UserStatus: FC = () => {
 
 	const toggleMenu = () => {
 		setIsMenuOpen((prev) => !prev);
+		console.log(store.user);
 	};
 
 	const handleSendVerificationCode = async () => {
@@ -70,9 +71,11 @@ const UserStatus: FC = () => {
 								Подтвердите почту.
 							</div>
 						)}
-
-						<div className={styles.dropdown_menu_textBox}>
-							заглушка под _ID
+						<div>
+							<div className={styles.dropdown_menu_text}>id</div>
+							<div className={styles.dropdown_menu_textBox}>
+								{store.user?.id}
+							</div>
 						</div>
 					</div>
 

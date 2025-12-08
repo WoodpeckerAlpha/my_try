@@ -43,6 +43,7 @@ class UserService {
 		}
 		user.isActivated = true;
 		await user.save();
+		console.log(user);
 	}
 
 	async login(email, password) {
@@ -62,6 +63,7 @@ class UserService {
 
 		const tokens = tokenService.generateToken({...userDto});
 		await tokenService.saveToken(userDto.id, tokens.refreshToken);
+		console.log(userDto);
 
 		return {...tokens, user: userDto};
 	}
