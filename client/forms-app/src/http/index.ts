@@ -1,7 +1,7 @@
 import axios from "axios";
 import {AuthResponse} from "../models/response/AuthResponse";
 
-// export const API_URL = process.env.REACT_APP_API_URL; //при проде переделывать process.env.REACT_APP_API_URL, так же в самом файле делать "/api"
+// export const API_URL = process.env.REACT_APP_API_URL; //при проде переделывать process.env.REACT_APP_API_URL, также в самом файле делать "/api"
 export const API_URL = "http://localhost:5000/api/";
 export const AUTH_URL = "auth";
 export const USER_URL = "users";
@@ -31,7 +31,7 @@ api.interceptors.response.use(
 	async (error) => {
 		const originalRequest = error.config;
 
-		// console.log("❌ Ошибка запроса:", {
+		// console.log("Ошибка запроса:", {
 		//     method: originalRequest?.method,
 		//     url: `${originalRequest?.baseURL}${originalRequest?.url}`,
 		//     headers: originalRequest?.headers,

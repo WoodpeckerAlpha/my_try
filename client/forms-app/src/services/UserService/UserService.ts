@@ -5,13 +5,13 @@ import {USER_URL} from "../../http";
 import {SuccessResponse} from "../../models/response/ListsResponse/SuccessResponse";
 
 export default class UserService {
-	static fetchUsers(): Promise<
+	static async fetchUsers(): Promise<
 		AxiosResponse<{status: number; users: IUser[]}>
 	> {
 		return api.get<{status: number; users: IUser[]}>(`${USER_URL}/users`);
 	}
 
-	static deleteAccount(
+	static async deleteAccount(
 		password: string
 	): Promise<AxiosResponse<{statusCode: number; message: String}>> {
 		return api.post<{statusCode: number; message: String}>(
