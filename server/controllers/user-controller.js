@@ -1,7 +1,6 @@
-const userService = require("../service/user-service");
+const userService = require("../service/user-services/user-service");
 const {validationResult} = require("express-validator");
 const ApiError = require("../exception/api-error");
-const {use} = require("react");
 
 class UserController {
 	async registration(req, res, next) {

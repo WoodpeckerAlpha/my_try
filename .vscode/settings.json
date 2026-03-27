@@ -1,0 +1,10 @@
+{
+	"jest.autoRun": {
+		"watch": false,
+		"onSave": "test-file"
+	},
+	"jest.rootPath": "server",
+	"jest.jestCommandLine": "npm test --",
+	"jest.runAllTestsFirst": false,
+	"jest.showCoverageOnLoad": false
+}
