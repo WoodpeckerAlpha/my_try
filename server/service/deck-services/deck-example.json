@@ -1,0 +1,52 @@
+{
+	"deck": {
+		"decks": [
+			{
+				"_id": "507f1f77bcf86cd799439011",
+				"title": "Моя первая колода",
+				"userId": "507f1f77bcf86cd799439001",
+				"description": "Изучаю английские слова",
+				"fieldConfig": [
+					{"name": "word", "type": "text"},
+					{"name": "translation", "type": "text"}
+				],
+				"createdAt": "2024-03-30T10:00:00.000Z",
+				"updatedAt": "2024-03-30T10:00:00.000Z"
+			},
+			{
+				"_id": "507f1f77bcf86cd799439012",
+				"title": "Неправильные глаголы",
+				"userId": "507f1f77bcf86cd799439001",
+				"description": "Топ 50 неправильных глаголов",
+				"fieldConfig": [
+					{"name": "infinitive", "type": "text"},
+					{"name": "past_simple", "type": "text"},
+					{"name": "past_participle", "type": "text"}
+				],
+				"createdAt": "2024-03-29T15:30:00.000Z",
+				"updatedAt": "2024-03-29T15:30:00.000Z"
+			},
+			{
+				"_id": "507f1f77bcf86cd799439013",
+				"title": "Французский A1",
+				"userId": "507f1f77bcf86cd799439001",
+				"description": "Базовые фразы на французском",
+				"fieldConfig": [
+					{"name": "french", "type": "text"},
+					{"name": "russian", "type": "text"},
+					{"name": "pronounce", "type": "audio"}
+				],
+				"createdAt": "2024-03-28T09:15:00.000Z",
+				"updatedAt": "2024-03-28T09:15:00.000Z"
+			}
+		],
+		"pagination": {
+			"currentPage": 2,
+			"pageSize": 10,
+			"totalItems": 25,
+			"totalPages": 3,
+			"hasNextPage": true,
+			"hasPrevPage": true
+		}
+	}
+}

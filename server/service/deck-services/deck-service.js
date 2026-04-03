@@ -64,6 +64,39 @@ class DeckService {
 			);
 		}
 	}
+
+	async getDecks(userId, limit = 20, page = 1) {
+		try {
+			const skip = (page - 1) * limit;
+			const decks = await DeckModel.find({userId: userId})
+				.sort({createAt: -1})
+				.limit(limit)
+				.skip(skip);
+
+			const total = await DeckModel.countDocuments({userId: userId});
+
+			return {
+				decks,
+				pagination: {
+					currentPage: page,
+					pageSize: limit,
+					totalItems: total,
+					totalPages: Math.ceil(total / limit),
+					hasNextPage: page < Math.ceil(total / limit),
+					hasPrevPage: page > 1,
+				},
+			};
+		} catch (error) {
+			if (error instanceof ApiError) {
+				throw error;
+			}
+
+			console.error("Error while getting deck:", error);
+			throw ApiError.InternalError(
+				"Something went wrong while getting deck"
+			);
+		}
+	}
 }
 
 module.exports = new DeckService();
