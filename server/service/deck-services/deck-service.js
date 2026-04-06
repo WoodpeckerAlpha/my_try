@@ -1,6 +1,4 @@
 const DeckModel = require("../../models/card-models/deck-model");
-const UserModel = require("../../models/user-model");
-
 const ApiError = require("../../exception/api-error");
 
 class DeckService {
@@ -39,11 +37,6 @@ class DeckService {
 			}
 			if (!fieldConfig) {
 				throw ApiError.BadRequest("Deck fieldConfig is required");
-			}
-
-			const user = await UserModel.findById(userId);
-			if (!user) {
-				throw ApiError.NotFound(`User with id ${userId} not found`);
 			}
 
 			const deck = await DeckModel.create({

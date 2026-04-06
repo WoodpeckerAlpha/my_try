@@ -4,13 +4,12 @@ const DeckService = require("../deck-services/deck-service");
 const ApiError = require("../../exception/api-error");
 
 class CardService {
-	async createCard(deckId, fields, parameters) {
+	async createCard(deckId, fields) {
 		try {
 			const deck = await DeckService.deckIsExist(deckId);
 			const card = await CardModel.create({
 				deckId: deckId,
 				fields: [fields],
-				learning: {...parameters},
 			});
 			return card;
 		} catch (error) {
